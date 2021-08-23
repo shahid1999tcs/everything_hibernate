@@ -1,10 +1,11 @@
 package relationship.examples;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class AccountEntity {
@@ -14,7 +15,10 @@ public class AccountEntity {
 	private String accountNumber;
 	private String accountType;
 	
-	@ManyToOne
+//	@ManyToOne
+//	private EmployeeEntity employee;
+	
+	@OneToOne(mappedBy="account", cascade=CascadeType.ALL)
 	private EmployeeEntity employee;
 
 	public Integer getAccountId() {

@@ -1,14 +1,12 @@
 package relationship.examples;
 
-import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 public class EmployeeEntity {
@@ -18,9 +16,13 @@ public class EmployeeEntity {
 	private String name;
 	private String email;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-    @JoinColumn(name="EMPLOYEE_ID")
-	private Set<AccountEntity> accounts;
+	@OneToOne(cascade = CascadeType.ALL)
+	@PrimaryKeyJoinColumn //For shared primary key OneToOne
+	private AccountEntity account;
+	
+//	@OneToMany(cascade=CascadeType.ALL)
+//    @JoinColumn(name="EMPLOYEE_ID")
+//	private Set<AccountEntity> accounts;
 
 	public Integer getID() {
 		return ID;
@@ -46,12 +48,22 @@ public class EmployeeEntity {
 		this.email = email;
 	}
 
-	public Set<AccountEntity> getAccounts() {
-		return accounts;
+	public AccountEntity getAccount() {
+		return account;
 	}
 
-	public void setAccounts(Set<AccountEntity> accounts) {
-		this.accounts = accounts;
+	public void setAccount(AccountEntity account) {
+		this.account = account;
 	}
+
+//	public Set<AccountEntity> getAccounts() {
+//		return accounts;
+//	}
+//
+//	public void setAccounts(Set<AccountEntity> accounts) {
+//		this.accounts = accounts;
+//	}
+	
+	
 	
 }
